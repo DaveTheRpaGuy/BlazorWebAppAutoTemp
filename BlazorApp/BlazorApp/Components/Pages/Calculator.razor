@@ -1,76 +1,26 @@
 ﻿@page "/calculator"
 @rendermode InteractiveServer
 
-<h3>Calculator</h3>
+<h1>Calculator</h1>
 
-<div>
-    <EditForm id="@formId" Model="@calculator" OnValidSubmit="HandleValidSubmit">
-        <DataAnnotationsValidator />
-        <ValidationSummary />
-        <div class="form-group">
-            <label>Input Expression:</label>
-            <InputText @bind-Value="calculator.Expression" />
-        </div>
-    </EditForm>
-</div>
-
-<div>
-    Result: @result
-</div>
-
-<div class="row">
-    <div class="col-md-4">
-        <table class="table">
-            <tbody>
-                <tr>
-                    <td>%</td>
-                    <td>CE</td>
-                    <td>C</td>
-                    <td>Backspace</td>
-                </tr>
-                <tr>
-                    <td>1/x</td>
-                    <td>x2</td>
-                    <td>sqrt</td>
-                    <td>/</td>
-                </tr>
-                <tr>
-                    <td>7</td>
-                    <td>8</td>
-                    <td>9</td>
-                    <td>x</td>
-                </tr>
-                <tr>
-                    <td>4</td>
-                    <td>5</td>
-                    <td>6</td>
-                    <td>-</td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>2</td>
-                    <td>3</td>
-                    <td>+</td>
-                </tr>
-                <tr>
-                    <td>+/-</td>
-                    <td>0</td>
-                    <td><button class="btn btn-outline-primary" type="submit">.</button></td>
-                    <td><button class="btn btn-outline-primary" form="@formId" type="submit">=</button></td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-</div>
+Number 1:
+<input type="number" @bind="@num1" />
+<br>
+Number 2:
+<input type="number" @bind="@num2" />
+<br>
+<br>
+<button class="btn btn-primary" @onclick="@Sum">Calculate sum</button>
+<br>
+<h2>Sum: @sum</h2>
 
 @code {
-    private CalculatorModel calculator = new CalculatorModel();
-    private string formId = "formId";
-    private string result = "";
+    decimal sum = 0;
+    decimal num1 = 0;
+    decimal num2 = 0;
 
-    private void HandleValidSubmit()
+    public void Sum()
     {
-        result = calculator.Expression;
+        sum = num1 + num2;
     }
-
 }
